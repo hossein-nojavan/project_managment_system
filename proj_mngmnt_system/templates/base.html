@@ -75,9 +75,9 @@
 
             <!-- Projects -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{% url 'projects:projects_list' %}">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Projects</span>
+                    <span>My Projects</span>
                 </a>
             </li>
 
@@ -173,6 +173,14 @@
 
                     </ul>
                     {% if request.user.is_authenticated %}
+                        <div class="d-none d-lg-inline-flex align-items-center bg-light border rounded px-3 py-2 shadow-sm mr-3 mt-2">
+                            <i class="fas fa-user-circle text-primary mr-2"></i>
+
+                            <span class="font-weight-bold text-gray-700">
+                                {{ request.user.username }}
+                            </span>
+                        </div>
+
                         <form method="post" action="{% url 'account:logout' %}" class="d-inline">
                             {% csrf_token %}
 
@@ -180,6 +188,7 @@
                                 Logout
                             </button>
                         </form>
+
                     {% else %}
                     <a href="{% url 'account:register' %}" class="mr-3">Register</a>
                     <a href="{% url 'account:login' %}">login</a>

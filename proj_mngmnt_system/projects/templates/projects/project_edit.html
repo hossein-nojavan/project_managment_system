@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit {{ project.title }}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+
+        <h1 class="h3 mb-0 text-gray-800">
+            Edit Project - {{ project.title }}
+        </h1>
+
+    </div>
+
+
+    <form method="post"
+          action="{% url 'projects:projects_update' project.id %}">
+
+        {% csrf_token %}
+
+        {{ form.non_field_errors }}
+
+        <div class="row">
+
+            <div class="col-lg-6 mb-4">
+
+
+                <!-- Title -->
+                <div class="form-group">
+
+                    <label for="{{ form.title.id_for_label }}">
+                        Project Title
+                    </label>
+
+                    {{ form.title }}
+
+                    {{ form.title.errors }}
+
+                </div>
+
+
+                <!-- Description -->
+                <div class="form-group">
+
+                    <label for="{{ form.description.id_for_label }}">
+                        Project Description
+                    </label>
+
+                    {{ form.description }}
+
+                    {{ form.description.errors }}
+
+                </div>
+
+
+                <!-- Members -->
+                <div class="form-group">
+
+                    <label for="{{ form.members.id_for_label }}">
+                        Members
+                    </label>
+
+                    {{ form.members }}
+
+                    {{ form.members.errors }}
+
+                    <small class="form-text text-muted">
+                        Select project members.
+                    </small>
+
+                </div>
+
+
+                <a href="{% url 'projects:projects_detail' project.id %}"
+                   class="btn btn-lg btn-secondary">
+                    Cancel
+                </a>
+
+
+                <button type="submit"
+                        class="btn btn-lg btn-primary">
+                    Update Project
+                </button>
+
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

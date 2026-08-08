@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-Projects
+My Projects
 {% endblock %}
 
 {% block content %}
@@ -11,7 +11,7 @@ Projects
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">
-            Projects
+            My Projects
         </h1>
 
         <a href="{% url 'projects:projects_add' %}"
@@ -31,20 +31,14 @@ Projects
     <div class="row">
         <div class="col-lg-6 mb-4">
 
-            <div class="list-group">
-
-                <a href="#"
-                   class="h6 mb-1 list-group-item list-group-item-action text-primary">
-                    Website 1
-                </a>
-
-                <a href="#"
-                   class="h6 mb-1 list-group-item list-group-item-action text-primary">
-                    Mobile App 3
-                </a>
-
-            </div>
-
+            {% for project in projs %}
+                {% if request.user.id == project.owner_id %}
+                    <a href="{% url 'projects:projects_detail' project.id %}"
+                    class="h6 mb-1 list-group-item list-group-item-action text-primary">
+                        {{project.title}} | owner: {{project.owner}}
+                    </a>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
 
